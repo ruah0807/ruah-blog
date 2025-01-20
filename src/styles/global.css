@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: #121212; /* 다크 모드 배경색 */
+  color: #e0e0e0; /* 다크 모드 텍스트 색상 */
+}
+
+header {
+  background-color: #1f1f1f; /* 다크 모드 헤더 배경색 */
+  padding: 8px;
+  color: #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+nav li {
+  margin-right: 30px;
+}
+
+h1 {
+  margin: 20px;
+}
+
+main {
+  padding: 50px 100px;
+  margin: 20px;
+  background-color: #1f1f1f; /* 다크 모드 메인 배경색 */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* 다크 모드 그림자 */
+}
