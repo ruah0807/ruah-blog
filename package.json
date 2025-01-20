@@ -1,0 +1,15 @@
+{
+  "name": "ruah-blog",
+  "version": "1.0.0",
+  "description": "마크다운 blog 만들기 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
