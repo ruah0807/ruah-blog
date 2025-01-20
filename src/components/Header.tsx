@@ -3,7 +3,7 @@ import React from 'react';
 const Header: React.FC = () => {
   return (
     <header>
-      <h1>롸그</h1>
+      <h1 className='header-title'>롸그</h1>
       <nav>
         <ul>
           <li>Home</li>
