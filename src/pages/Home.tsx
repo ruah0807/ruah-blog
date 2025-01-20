@@ -12,7 +12,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const importMarkdownFiles = async () => {
-      const files = import.meta.glob('/posts/*.md', { as: 'raw' });
+      const files = import.meta.glob('/posts/*.md', { query: '?raw', import: 'default' });
       const postList: Post[] = [];
 
       for (const path in files) {
