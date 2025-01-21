@@ -22,10 +22,13 @@ const App: React.FC = () => {
         <PostList onSelect={handleSelectFile} />
         </div>
         <div className='post-container'>
-          <MDFile fileName={selectedFile} />
-          <div className='main-post'>
-            롸그에 오신것을 환영합니다.
-          </div>
+        {selectedFile ? (
+            <MDFile fileName={selectedFile} />
+          ) : (
+            <div className='main-post'>
+              롸그에 오신것을 환영합니다.
+            </div>
+          )}
         </div>
       </div>
     </div>

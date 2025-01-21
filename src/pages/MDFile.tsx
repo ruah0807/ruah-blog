@@ -21,7 +21,7 @@ const MDFile: React.FC<MDFileProps> = ({ fileName }) => {
         const content = await fileModules[filePath]();
         const { content: mdContent } = matter(content);
         setContent(mdContent);
-        console.log(mdContent);
+        // console.log(mdContent);
       }
     };
 
