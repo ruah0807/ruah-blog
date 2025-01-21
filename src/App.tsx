@@ -1,18 +1,37 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
 import Header from './components/Header';
-import Home from './pages/Home';
-import Posts from './pages/Posts';
+import PostList from './pages/PostList';
+import MDFile from './pages/MDFile';
+// import './App.css'
+
 
 const App: React.FC = () => {
+
+  const [selectedFile, setSelectedFile]  = useState<string>('');
+
+  const handleSelectFile = (fileName: string) => {
+    setSelectedFile(fileName);
+    console.log(`Selected file: ${fileName}`);
+  };
+
   return (
-    <Router>
+    <div>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/posts" element={<Posts />} />
-      </Routes>
-    </Router>
+      <div className='container'>
+        <div className='post-list-container'>
+        <PostList onSelect={handleSelectFile} />
+        </div>
+        <div className='post-container'>
+        {selectedFile ? (
+            <MDFile fileName={selectedFile} />
+          ) : (
+            <div className='main-post'>
+              롸그에 오신것을 환영합니다.
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

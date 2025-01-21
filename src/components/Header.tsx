@@ -1,9 +1,15 @@
 import React from 'react';
 
+
 const Header: React.FC = () => {
+  const handleTitleClick = () => {
+    window.location.href = '/'; // Navigate to the main page
+  };
+
   return (
     <header>
-      <h1>롸그</h1>
+      <h1 className='header-title' onClick={handleTitleClick} style={{ cursor: 'pointer' }}>
+        롸그</h1>
       <nav>
         <ul>
           <li>Home</li>
