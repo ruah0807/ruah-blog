@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import PostCard from '../components/PostCard';
 import matter from 'gray-matter';
 
 interface Post {
   title: string;
   date: string;
+  fileName: string;
 }
 
-const Home: React.FC = () => {
+interface PostListProps {
+  onSelect: (fileName: string) => void;
+}
+
+const PostList: React.FC<PostListProps> = ({ onSelect }) => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -20,9 +24,10 @@ const Home: React.FC = () => {
         const { data } = matter(content);
         const fileName = path.split('/').pop() || '';
         const date = fileName.split('-').slice(0, 3).join('-');
-        postList.push({ title: data.title, date });
+        postList.push({ title: data.title, date, fileName });
       }
-      console.log(postList);
+      postList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
       setPosts(postList);
     };
 
@@ -30,12 +35,11 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="page-content">
-      <h2 className='page-title'>Posts List</h2>
+    <div className="sidebar">
       <ul>
         {posts.map((post, index) => (
-          <li key={index}>
-            <PostCard title={post.title} date={post.date} />
+          <li key={index} onClick={() => onSelect(post.fileName)}>
+            {post.title} ({post.date})
           </li>
         ))}
       </ul>
@@ -43,4 +47,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default PostList;

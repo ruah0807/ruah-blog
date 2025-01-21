@@ -1,0 +1,32 @@
+.markdown-content {
+  color: #e0e0e0; /* 텍스트 색상 */
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  color: #ffffff;
+}
+
+.markdown-content p {
+  margin-bottom: 1em;
+}
+
+.markdown-content pre {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.markdown-content code {
+  background-color: #333;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
