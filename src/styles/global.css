@@ -60,7 +60,16 @@ main {
 .sidebar li:hover {
   color: #fc4d71; /* 호버 시 배경색 변경 */
 }
-
+.sidebar-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #fc4d71;
+}
+.sidebar-count {
+  font-size: small;
+  color: #b0a3a6;
+}
 .container {
   display: flex;
   padding: 50px 100px;

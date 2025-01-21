@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import matter from 'gray-matter';
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Markdown from "react-markdown";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
 import './MDFile.css';
 
 interface MDFileProps {
@@ -29,29 +30,30 @@ const MDFile: React.FC<MDFileProps> = ({ fileName }) => {
 
   return (
     <div className='markdown-content'>
-      <ReactMarkdown
-        components={{
-          code({ inline, className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || '');
-            return !inline && match ? (
-              <SyntaxHighlighter
-                style={solarizedlight}
-                language={match[1]}
-                PreTag="div"
-                {...props}
-              >
-                {String(children).replace(/\n$/, '')}
-              </SyntaxHighlighter>
-            ) : (
-              <code className={className} {...props}>
-                {children}
-              </code>
-            );
-          }
-        }}
-      >
-        {content}
-      </ReactMarkdown>
+      <Markdown
+      components={{
+        code({ inline, className = "", children, ...props }: { inline: boolean, className?: string, children: React.ReactNode }) {
+          const match = /language-(\w+)/.exec(className);
+
+          return !inline && match ? (
+            <SyntaxHighlighter
+              style={materialDark}
+              PreTag="div"
+              language={match[1]}
+              {...props}
+            >
+              {String(children).replace(/\n$/, "")}
+            </SyntaxHighlighter>
+          ) : (
+            <code className={className} {...props}>
+              {children}
+            </code>
+          );
+        }
+      }}
+    >
+      {content}
+    </Markdown>
     </div>
   );
 };

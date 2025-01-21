@@ -33,10 +33,12 @@ const PostList: React.FC<PostListProps> = ({ onSelect }) => {
 
     importMarkdownFiles();
   }, []);
-
+  
   return (
     <div className="sidebar">
-      <ul>
+      <p className="sidebar-title"> 블로그 리스트 </p>
+      <p className="sidebar-count">전체 블로그 {posts.length}개</p>
+      <ul className="sidebar-list">
         {posts.map((post, index) => (
           <li key={index} onClick={() => onSelect(post.fileName)}>
             {post.title} ({post.date})
