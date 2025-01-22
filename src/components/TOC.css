@@ -1,0 +1,20 @@
+.toc-list {
+  list-style: none;
+  line-height: 1.5;
+  font-size: 13px;
+  padding: 0px;
+  margin: 0px;
+}
+.toc-list li {
+  margin-left: 0; /* Reset margin */
+  margin-bottom: 7px;
+}
+
+.toc-list a {
+  text-decoration: none; /* Remove underline */
+  color: #e0e0e0; /* Text color */
+}
+
+.toc-list a:hover {
+  color: #ff9a8b; /* Hover color */
+}
