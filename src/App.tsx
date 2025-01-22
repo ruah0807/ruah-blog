@@ -20,7 +20,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <Router  basename={process.env.PUBLIC_URL}>
+    <Router  basename={`${process.env.PUBLIC_URL}`}>
     {/* // <Router  basename='/ruah-blog/'>  */}
     {/* <Router> */}
       <Header toggleSidebar={toggleSidebar} />
