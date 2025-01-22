@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "22.12.0" # 프로젝트에 맞는 Node.js 버전
 
@@ -28,7 +28,7 @@ jobs:
         run: pnpm run build # 프로젝트에 맞는 빌드 명령어
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.BLOG_KEY }}
           publish_dir: ./dist

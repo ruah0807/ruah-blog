@@ -19,6 +19,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <script src="/ruah-blog/src/main.tsx"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "process": "process/browser"
+        }
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
