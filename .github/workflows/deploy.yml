@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: "22.12.0" # 프로젝트에 맞는 Node.js 버전
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install dependencies
         run: pnpm install
 
