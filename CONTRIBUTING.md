@@ -10,12 +10,12 @@
 ## 커밋 메시지 규칙
 
 - **형식**: `타입: 설명`
-- **타입 예시**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+- **타입 예시**: `feat`, `fix`, `docs`, `style`
 - **예시**: `feat: Add new post component`
 
 ## 브랜치 전략
 
 - **메인 브랜치**: `main`
-- **기능 브랜치**: `feature/기능명`
+- **기능 브랜치**: `feat/기능명`
 
 이 가이드라인을 따라주시면 프로젝트의 품질을 유지하는 데 큰 도움이 됩니다. 감사합니다!

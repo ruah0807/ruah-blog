@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import matter from 'gray-matter';
+import { useNavigate } from 'react-router-dom';
 
 interface Post {
   title: string;
   date: string;
   fileName: string;
+  subtitle: string;
 }
 
 interface PostListProps {
@@ -13,6 +15,8 @@ interface PostListProps {
 
 const PostList: React.FC<PostListProps> = ({ onSelect }) => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const navigate = useNavigate();
+  const [selectedPost, setSelectedPost] = useState<string>('');
 
   useEffect(() => {
     const importMarkdownFiles = async () => {
@@ -24,7 +28,8 @@ const PostList: React.FC<PostListProps> = ({ onSelect }) => {
         const { data } = matter(content);
         const fileName = path.split('/').pop() || '';
         const date = fileName.split('-').slice(0, 3).join('-');
-        postList.push({ title: data.title, date, fileName });
+        const subtitle = fileName.split('-').slice(3).join('-').replace('.md', '');
+        postList.push({ title: data.title, date, fileName, subtitle });
       }
       postList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -40,8 +45,14 @@ const PostList: React.FC<PostListProps> = ({ onSelect }) => {
       <p className="sidebar-count">전체 블로그 {posts.length}개</p>
       <ul className="sidebar-list">
         {posts.map((post, index) => (
-          <li key={index} onClick={() => onSelect(post.fileName)}>
-            {post.title} ({post.date})
+          <li key={index} onClick={() => {
+            onSelect(post.fileName);
+            navigate(`/${post.subtitle}`);
+            setSelectedPost(post.fileName);
+          }}
+          className={selectedPost === post.fileName ? 'active' : ''}>
+            {post.title}
+            <span className='sidebar-date'> {post.date}</span>
           </li>
         ))}
       </ul>
