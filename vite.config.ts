@@ -13,18 +13,16 @@ export default defineConfig({
       },
       plugins: [
         NodeGlobalsPolyfillPlugin({
-            // process: true,
             buffer: true,
         }),
     ],
 },
 },
 resolve: {
-alias: {
-    // process: "process/browser",
-    stream: "stream-browserify",
-    zlib: "browserify-zlib",
-    util: "util",
-},
-},
+  alias: {
+      stream: "stream-browserify",
+      zlib: "browserify-zlib",
+      util: "util",
+    },
+  },
 });
