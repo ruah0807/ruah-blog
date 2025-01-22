@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import PostList from './pages/PostList';
 import MDFile from './pages/MDFile';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 const App: React.FC = () => {
 
