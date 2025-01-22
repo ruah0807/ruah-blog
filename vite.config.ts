@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 
 export default defineConfig({
-  base: '/ruah-blog',
+  base: '/ruah-blog/',
   plugins: [react()],
   assetsInclude: ['**/*.md'],
   optimizeDeps: {
