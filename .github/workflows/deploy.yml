@@ -20,30 +20,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # lastUpdated가 활성화되지 않은 경우 필요하지 않음
-      - uses: pnpm/action-setup@v3 # pnpm을 사용하는 경우 주석 해제
-        with:
-          version: 9
-      # - uses: oven-sh/setup-bun@v1 # Bun을 사용하는 경우 주석 해제
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.12.0
-          cache: pnpm # 또는 pnpm / yarn
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Install dependencies
-        run: pnpm install
-      - name: Build with VitePress
-        run: pnpm docs:build # 또는 pnpm docs:build / yarn docs:build / bun run docs:build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs/.vitepress/dist
+  # build:
+  #   - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0 # lastUpdated가 활성화되지 않은 경우 필요하지 않음
+  #     - uses: pnpm/action-setup@v3 # pnpm을 사용하는 경우 주석 해제
+  #       with:
+  #         version: 9
+  #     # - uses: oven-sh/setup-bun@v1 # Bun을 사용하는 경우 주석 해제
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 22.12.0
+  #         cache: pnpm # 또는 pnpm / yarn
+  #     - name: Setup Pages
+  #       uses: actions/configure-pages@v4
+  #     - name: Install dependencies
+  #       run: pnpm install
+  #     - name: Build with VitePress
+  #       run: pnpm docs:build # 또는 pnpm docs:build / yarn docs:build / bun run docs:build
+  #     - name: Upload artifact
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: docs/.vitepress/dist
 
   deploy:
     environment:
@@ -53,27 +53,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # - name: Install Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: "22.12.0" # 프로젝트에 맞는 Node.js 버전
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "22.12.0" # 프로젝트에 맞는 Node.js 버전
 
-      # - name: Install pnpm
-      #   run: npm install -g pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
 
-      # - name: Install dependencies
-      #   run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-      # - name: Build project
-      #   run: pnpm run build # 프로젝트에 맞는 빌드 명령어
+      - name: Build project
+        run: pnpm run build # 프로젝트에 맞는 빌드 명령어
 
-      # - name: Upload artifact
-      #   uses: actions/upload-pages-artifact@v3
-      #   with:
-      #     path: "./dist"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"
 
       - name: Deploy to GitHub Pages
         id: deployment
