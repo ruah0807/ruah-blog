@@ -10,7 +10,7 @@ import './styles/global.css'; // global.css를 나중에 임포트
 
 const router = createHashRouter([
   {
-    path: "/ruah-blog/",
+    path: "*",
     element: <App />,
     loader: () => <div>로딩중...</div>,
     ErrorBoundary: () => <div>404 NOT FOUND</div>,

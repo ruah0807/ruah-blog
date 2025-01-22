@@ -16,7 +16,7 @@
            const filePath = `/posts/${fileName}`;
            const fileModules = import.meta.glob('/posts/*.md', { query: '?raw', import: 'default' });
            const content = await fileModules[filePath]();
-           const { content: mdContent } = matter(content);
+           const { content: mdContent } = matter(content as string);
 
            const headingRegex = /^(?!#\s)(#{1,5})\s+(.*)$/gm;
            const matches = [...mdContent.matchAll(headingRegex)];

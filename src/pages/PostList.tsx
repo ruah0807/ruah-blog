@@ -25,7 +25,7 @@ const PostList: React.FC<PostListProps> = ({ onSelect }) => {
 
       for (const path in files) {
         const content = await files[path]();
-        const { data } = matter(content);
+        const { data } = matter(content as string);
         const fileName = path.split('/').pop() || '';
         const date = fileName.split('-').slice(0, 3).join('-');
         const subtitle = fileName.split('-').slice(3).join('-').replace('.md', '');

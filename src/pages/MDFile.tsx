@@ -29,7 +29,7 @@ const MDFile: React.FC<MDFileProps> = ({ fileName }) => {
         const filePath = `/posts/${fileName}`;
         const fileModules = import.meta.glob('/posts/*.md', { query: '?raw', import: 'default' });
         const content = await fileModules[filePath]();
-        const { data, content: mdContent } = matter(content);
+        const { data, content: mdContent } = matter(content as string);
         setContent(mdContent);
         setTitle(data.title || '');
 

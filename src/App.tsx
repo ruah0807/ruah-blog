@@ -3,11 +3,9 @@ import Header from './components/Header';
 import PostList from './pages/PostList';
 import MDFile from './pages/MDFile';
 import { Route, Routes } from 'react-router-dom';
-import { HashRouter as Router } from 'react-router-dom';
 
 const App: React.FC = () => {
-
-  const [selectedFile, setSelectedFile]  = useState<string>('');
+  const [selectedFile, setSelectedFile] = useState<string>('');
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
   const handleSelectFile = (fileName: string) => {
@@ -18,10 +16,10 @@ const App: React.FC = () => {
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
-  }
+  };
 
   return (
-    <Router  basename='process.env.PUBLIC_URL'>
+    <>
       <Header toggleSidebar={toggleSidebar} />
       <div className={`container ${showSidebar ? 'show-sidebar' : ''}`}>
         <div className='content-wrapper'>
@@ -30,13 +28,13 @@ const App: React.FC = () => {
           </div>
           <div className='post-container'>
             <Routes>
-              <Route path="/" element={<div className='main-post'>롸그에 오신것을 환영합니다.</div>} />
+              <Route path="*" element={<div className='main-post'>롸그에 오신것을 환영합니다.</div>} />
               <Route path="/:subtitle" element={<MDFile fileName={selectedFile} />} />
             </Routes>
           </div>
         </div>
       </div>
-    </Router>
+    </>
   );
 };
 
