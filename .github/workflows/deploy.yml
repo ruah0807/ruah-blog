@@ -53,22 +53,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      # - name: Checkout code
+      #   uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      # - name: Install Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "22.12.0" # 프로젝트에 맞는 Node.js 버전
+
+      # - name: Install pnpm
+      #   run: npm install -g pnpm
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
-          node-version: "22.12.0" # 프로젝트에 맞는 Node.js 버전
-
-      - name: Install pnpm
-        run: npm install -g pnpm
+          node-version: 22.12.0
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Build project
         run: pnpm run build # 프로젝트에 맞는 빌드 명령어
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
