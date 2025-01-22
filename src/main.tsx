@@ -1,24 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import {
-  RouterProvider,
-  createHashRouter,
-} from "react-router-dom";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/global.css'; // global.css를 나중에 임포트
 // import './App.css';
 
-const router = createHashRouter([
-  {
-    path: "*",
-    element: <App />,
-    loader: () => <div>로딩중...</div>,
-    ErrorBoundary: () => <div>404 NOT FOUND</div>,
-  }
-]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-      <RouterProvider router={router} />
-  </React.StrictMode>
-);
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
