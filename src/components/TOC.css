@@ -12,9 +12,13 @@
 
 .toc-list a {
   text-decoration: none; /* Remove underline */
-  color: #e0e0e0; /* Text color */
+  color: #b0a3a6; /* Text color */
 }
 
 .toc-list a:hover {
   color: #ff9a8b; /* Hover color */
+}
+
+.toc-list a:active {
+  color: #ff9a8b; /* Active color */
 }
