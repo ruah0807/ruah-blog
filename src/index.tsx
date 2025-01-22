@@ -9,7 +9,7 @@ import "./styles/global.css";
 
 const router = createHashRouter([
   {
-    path: "/",
+    path: "/ruah-blog",
     element: <App />,
     loader: () => <div>로딩중...</div>,
     ErrorBoundary: () => <div>404 NOT FOUND</div>,

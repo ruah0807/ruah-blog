@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import PostList from './pages/PostList';
 import MDFile from './pages/MDFile';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 
 const App: React.FC = () => {
 
@@ -20,7 +21,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <BrowserRouter  basename='/ruah-blog'>
+    <Router  basename='/ruah-blog'>
       <Header toggleSidebar={toggleSidebar} />
       <div className={`container ${showSidebar ? 'show-sidebar' : ''}`}>
         <div className='content-wrapper'>
@@ -35,7 +36,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 };
 
