@@ -7,7 +7,12 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   background-color: #121212;
-  color: #e0e0e0;
+}
+
+*,
+img,
+button {
+  user-select: none; /* Disable text selection */
 }
 
 .line {
@@ -17,10 +22,7 @@ html {
 .hamburger {
   display: none;
 }
-.sidebar,
-.sidebar * {
-  user-select: none; /* Disable text selection */
-}
+
 .sidebar ul {
   list-style: none;
   padding: 0;
