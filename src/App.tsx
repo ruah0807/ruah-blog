@@ -21,8 +21,7 @@ const App: React.FC = () => {
 
   return (
     // <Router  basename={`${process.env.PUBLIC_URL}`}>
-    <Router  basename='/ruah-blog/'>  
-    {/* <Router> */}
+    <Router>  
       <Header toggleSidebar={toggleSidebar} />
       <div className={`container ${showSidebar ? 'show-sidebar' : ''}`}>
         <div className='content-wrapper'>
@@ -31,8 +30,8 @@ const App: React.FC = () => {
           </div>
           <div className='post-container'>
             <Routes>
-              <Route path="/" element={<div className='main-post'>롸그에 오신것을 환영합니다.</div>} />
-              <Route path="/:subtitle" element={<MDFile fileName={selectedFile} />} />
+                <Route path="/" element={<div className='main-post'>롸그에 오신것을 환영합니다.</div>} />
+                <Route path="/:subtitle" element={<MDFile fileName={selectedFile} />} />
             </Routes>
           </div>
         </div>
