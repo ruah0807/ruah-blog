@@ -30,8 +30,9 @@ const App: React.FC = () => {
           </div>
           <div className='post-container'>
             <Routes>
-                <Route path="/" element={<div className='main-post'>롸그에 오신것을 환영합니다.</div>} />
-                <Route path="/*" element={<MDFile fileName={selectedFile} />} />
+              <Route path="/" element={<div className='main-post'>롸그에 오신것을 환영합니다.</div>} />
+              <Route path="/:category/:subtitle" element={<MDFile />} />
+              <Route path="/:subtitle" element={<MDFile />} />
             </Routes>
           </div>
         </div>
