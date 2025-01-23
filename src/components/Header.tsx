@@ -6,7 +6,7 @@ interface HeaderProps {
 }
 const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const handleTitleClick = () => {
-    window.location.href = '/ruah-blog'; // Navigate to the main page
+    window.location.href = '/ruah-blog/'; // Navigate to the main page
   };
 
   return (
