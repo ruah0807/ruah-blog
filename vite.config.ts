@@ -18,11 +18,4 @@ export default defineConfig({
     ],
 },
 },
-resolve: {
-  alias: {
-      stream: "stream-browserify",
-      zlib: "browserify-zlib",
-      util: "util",
-    },
-  },
 });
