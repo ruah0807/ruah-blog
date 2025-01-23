@@ -16,7 +16,7 @@ interface ExtraProps {
   children?: React.ReactNode;
 }
 
-const MDFile: React.FC<MDFileProps> = ({ fileName }) => {
+const MDFile: React.FC<MDFileProps> = ({  fileName }) => {
   const [content, setContent] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
@@ -24,21 +24,27 @@ const MDFile: React.FC<MDFileProps> = ({ fileName }) => {
   const tocRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const fetchContent = async () => {
-      if (fileName) {
-        const filePath = `/posts/${fileName}`;
-        const fileModules = import.meta.glob('/posts/*.md', { query: '?raw', import: 'default' });
-        const content = await fileModules[filePath]();
-        const { data, content: mdContent } = matter(content as string);
-        setContent(mdContent);
-        setTitle(data.title || '');
-
-        const date = fileName.split('-').slice(0, 3).join('-');
-        setDate(date);
-        console.log(`제목 : ${data.title}, 날짜 : ${date}`);
-      }
-    };
-
+      const fetchContent = async () => {
+        if (fileName) {
+          const fileModules = import.meta.glob('/posts/**/*.md', { query: '?raw', import: 'default' });
+          const filePath = `/posts/${fileName}`;
+    
+          if (fileModules[filePath]) {
+            const content = await fileModules[filePath]();
+            const { data, content: mdContent } = matter(content as string);
+            setContent(mdContent);
+            setTitle(data.title || '');
+    
+            const date = fileName.split('-').slice(0, 3).join('-');
+            setDate(date);
+            console.log(`fileName : ${fileName}`);
+            console.log(`filePath : ${filePath}`);
+            console.log(`제목 : ${data.title}, 날짜 : ${date}`);
+          } else {
+            console.error(`File not found: ${filePath}`);
+          }
+        }
+      };
     fetchContent();
   }, [fileName]);
 

@@ -14,7 +14,7 @@
        const fetchContent = async () => {
          if (fileName) {
            const filePath = `/posts/${fileName}`;
-           const fileModules = import.meta.glob('/posts/*.md', { query: '?raw', import: 'default' });
+           const fileModules = import.meta.glob('/posts/**/*.md', { query: '?raw', import: 'default' });
            const content = await fileModules[filePath]();
            const { content: mdContent } = matter(content as string);
 

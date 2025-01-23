@@ -31,12 +31,12 @@ const PostList: React.FC<PostListProps> = ({ onSelect }) => {
         const content = await files[path]();
         const { data } = matter(content as string);
         const parts = path.split('/');
-        const fileName = parts.pop() || '';
-        const category = parts.length > 2 ? parts[2] : null;
+        const fileName = parts.slice(2).join('/'); // Include category if present
+        const category = parts.length > 3 ? parts[2] : null;
         const date = fileName.split('-').slice(0, 3).join('-');
-        const subtitle = fileName.split('-').slice(3).join('-').replace('.md', '');
+        const subtitle = category ? `${category}/${fileName.split('-').slice(3).join('-').replace('.md', '')}` : fileName.split('-').slice(3).join('-').replace('.md', '');
         postList.push({ title: data.title, date, fileName, subtitle, category });
-      }
+      } 
       const groupedPosts = postList.reduce((acc, post) => {
         const key = post.category || 'Others';
         if (!acc[key]) {
