@@ -3,12 +3,9 @@ import matter from 'gray-matter';
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { useNavigate, useParams } from 'react-router-dom';
 import './MDFile.css';
 import TOC from '../components/TOC';
-
-interface MDFileProps {
-  fileName: string;
-}
 
 interface ExtraProps {
   inline?: boolean;
@@ -16,29 +13,37 @@ interface ExtraProps {
   children?: React.ReactNode;
 }
 
-const MDFile: React.FC<MDFileProps> = ({ fileName }) => {
+const MDFile: React.FC = () => {
   const [content, setContent] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const contentRef = useRef<HTMLDivElement>(null);
   const tocRef = useRef<HTMLDivElement>(null);
-
+  const navigate = useNavigate();
+  const { category, subtitle } = useParams();
+const fileName = (category ? `${category}/${subtitle}` : subtitle) || '';
   useEffect(() => {
     const fetchContent = async () => {
       if (fileName) {
-        const filePath = `/posts/${fileName}`;
-        const fileModules = import.meta.glob('/posts/*.md', { query: '?raw', import: 'default' });
-        const content = await fileModules[filePath]();
-        const { data, content: mdContent } = matter(content as string);
-        setContent(mdContent);
-        setTitle(data.title || '');
+        const fileModules = import.meta.glob('/posts/**/*.md', { query: '?raw', import: 'default' });
+        const filePath = `/posts/${fileName}.md`;
 
-        const date = fileName.split('-').slice(0, 3).join('-');
-        setDate(date);
-        console.log(`제목 : ${data.title}, 날짜 : ${date}`);
+        if (fileModules[filePath]) {
+          const content = await fileModules[filePath]();
+          const { data, content: mdContent } = matter(content as string);
+          setContent(mdContent);
+          setTitle(data.title || '');
+
+          const date = fileName.split('-').slice(0, 3).join('-');
+          setDate(date);
+          console.log(`fileName : ${fileName}`);
+          console.log(`filePath : ${filePath}`);
+          console.log(`제목 : ${data.title}, 날짜 : ${date}`);
+        } else {
+          console.error(`File not found: ${filePath}`);
+        }
       }
     };
-
     fetchContent();
   }, [fileName]);
 
@@ -60,6 +65,7 @@ const MDFile: React.FC<MDFileProps> = ({ fileName }) => {
   return (
     <div className='markdown-container'>
       <div className='markdown-content' ref={contentRef}>
+      <button onClick={() => navigate(-1)}>❮ Back</button>
         <div className='md-header'>
           <div className='md-title'>{title}</div>
           <div className='md-date'>{date}</div>
