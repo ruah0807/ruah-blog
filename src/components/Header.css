@@ -9,8 +9,6 @@ header {
 }
 
 .header-title {
-  font-size: 20px;
-  margin: 10px 20px;
   justify-content: center;
   text-align: center;
 }
@@ -27,6 +25,9 @@ nav ul {
 nav li {
   cursor: pointer;
   margin-right: 20px;
+}
+.header-logo {
+  width: 60px;
 }
 
 @media (max-width: 768px) {

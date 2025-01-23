@@ -17,7 +17,10 @@ html {
 .hamburger {
   display: none;
 }
-
+.sidebar,
+.sidebar * {
+  user-select: none; /* Disable text selection */
+}
 .sidebar ul {
   list-style: none;
   padding: 0;
@@ -56,6 +59,22 @@ html {
   font-size: small;
   color: #b0a3a6;
 }
+.sidebar-category {
+  cursor: pointer;
+  color: #dfcfd2;
+}
+.sidebar-folder {
+  color: #dfcfd2;
+  font-size: medium;
+}
+
+.file-item {
+  padding-left: 10px; /* Add indentation */
+}
+
+.file-item.active {
+  font-weight: bold;
+}
 
 .container {
   display: flex;
@@ -81,6 +100,11 @@ html {
   color: #fde0db;
   overflow-y: auto;
   max-height: 100vh;
+}
+
+.main-post {
+  padding: 20px;
+  font-size: 20px;
 }
 
 @media (max-width: 768px) {
