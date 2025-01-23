@@ -20,7 +20,6 @@ const App: React.FC = () => {
   }
 
   return (
-    // <Router  basename={`${process.env.PUBLIC_URL}`}>
     <Router basename={process.env.PUBLIC_URL}>  
       <Header toggleSidebar={toggleSidebar} />
       <div className={`container ${showSidebar ? 'show-sidebar' : ''}`}>
