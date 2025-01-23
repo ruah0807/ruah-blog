@@ -31,7 +31,7 @@
 
 .md-date {
   font-size: 14px;
-  color: #b0a3a6;
+  color: #84787a;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
@@ -39,7 +39,7 @@
 
 /* 마크다운 콘텐츠 */
 .markdown-content {
-  color: #e0e0e0; /* 텍스트 색상 */
+  color: #dfcfd2; /* 텍스트 색상 */
   padding: 20px;
   overflow-y: auto; /* Enable vertical scrolling */
   max-height: 100vh;
@@ -66,7 +66,7 @@
   color: #ff9a8b;
 }
 .markdown-content a {
-  color: #b0a3a6;
+  color: #61b1e6;
 }
 .markdown-content pre {
   font-size: x-small; /* Adjust the font size */
@@ -80,6 +80,9 @@
   height: auto; /* Maintain aspect ratio */
   display: block; /* Remove inline spacing */
   margin: 0 auto; /* Center images if needed */
+}
+.markdown-content hr {
+  border: 0.5px solid #2f2f2f;
 }
 
 @media (max-width: 768px) {
@@ -96,5 +99,10 @@
     max-height: 100vh;
     line-height: 1.5;
     font-size: 12px;
+    width: 100%;
+    margin: 0 10px;
+  }
+  .toc-container {
+    display: none; /* Hide TOC on small screens */
   }
 }

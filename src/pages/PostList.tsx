@@ -7,6 +7,7 @@ interface Post {
   date: string;
   fileName: string;
   subtitle: string;
+  category: string | null;
 }
 
 interface PostListProps {
@@ -14,26 +15,38 @@ interface PostListProps {
 }
 
 const PostList: React.FC<PostListProps> = ({ onSelect }) => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [state, setState] = useState({
+    postsByCategory: {} as Record<string, Post[]>,
+    selectedCategory: null as string | null,
+    selectedPost: ''
+  });
   const navigate = useNavigate();
-  const [selectedPost, setSelectedPost] = useState<string>('');
 
   useEffect(() => {
     const importMarkdownFiles = async () => {
-      const files = import.meta.glob('/posts/*.md', { query: '?raw', import: 'default' });
+      const files = import.meta.glob('/posts/**/*.md', { query: '?raw', import: 'default' });
       const postList: Post[] = [];
 
       for (const path in files) {
         const content = await files[path]();
         const { data } = matter(content as string);
-        const fileName = path.split('/').pop() || '';
+        const parts = path.split('/');
+        const fileName = parts.pop() || '';
+        const category = parts.length > 2 ? parts[2] : null;
         const date = fileName.split('-').slice(0, 3).join('-');
         const subtitle = fileName.split('-').slice(3).join('-').replace('.md', '');
-        postList.push({ title: data.title, date, fileName, subtitle });
+        postList.push({ title: data.title, date, fileName, subtitle, category });
       }
-      postList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      const groupedPosts = postList.reduce((acc, post) => {
+        const key = post.category || 'Others';
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(post);
+        return acc;
+      }, {} as Record<string, Post[]>);
 
-      setPosts(postList);
+      setState(preState => ({ ...preState, postsByCategory: groupedPosts }));
     };
 
     importMarkdownFiles();
@@ -42,20 +55,34 @@ const PostList: React.FC<PostListProps> = ({ onSelect }) => {
   return (
     <div className="sidebar">
       <p className="sidebar-title"> 블로그 리스트 </p>
-      <p className="sidebar-count">전체 블로그 {posts.length}개</p>
-      <ul className="sidebar-list">
-        {posts.map((post, index) => (
-          <li key={index} onClick={() => {
-            onSelect(post.fileName);
-            navigate(`/${post.subtitle}`);
-            setSelectedPost(post.fileName);
-          }}
-          className={selectedPost === post.fileName ? 'active' : ''}>
-            {post.title}
-            <span className='sidebar-date'> {post.date}</span>
-          </li>
-        ))}
-      </ul>
+      <p className="sidebar-count">전체 블로그 {Object.values(state.postsByCategory).flat().length}개</p>
+      {Object.entries(state.postsByCategory).sort(([a], [b]) => a === 'Others' ? 1 : b === 'Others' ? -1 : 0).map(([category, posts]) => (
+        <div className='sidebar-category' key={category}>
+          {category !== 'Others' && (
+            <div className='sidebar-folder' draggable="false" onClick={() => setState(prevState => ({
+              ...prevState,
+              selectedCategory: prevState.selectedCategory === category ? null : category
+            }))}>
+              {state.selectedCategory === category ? '▼ ' : '▷ '} {category}
+            </div>
+          )}
+          {(state.selectedCategory === category || category === 'Others') && (
+            <ul className="sidebar-list">
+              {posts.map((post, index) => (
+                <li key={index} onClick={() => {
+                  onSelect(post.fileName);
+                  navigate(`/${post.subtitle}`);
+                  setState(prevState => ({ ...prevState, selectedPost: post.fileName }));
+                }}
+                className={`file-item ${state.selectedPost === post.fileName ? 'active' : ''}`}>
+                  {post.title}
+                  <span className='sidebar-date'> {post.date}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
