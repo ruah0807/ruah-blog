@@ -35,8 +35,8 @@ const PostList: React.FC<PostListProps> = ({ onSelect }) => {
         const category = parts.length > 3 ? parts[2] : null;
         const date = fileName.split('-').slice(0, 3).join('-');
         const subtitle = category 
-  ? `${category}/${fileName.replace('.md', '').split('/').slice(1).join('/')}` 
-  : fileName.replace('.md', '');
+          ? `${category}/${fileName.replace('.md', '').split('/').slice(1).join('/')}` 
+          : fileName.replace('.md', '');
         postList.push({ title: data.title, date, fileName, subtitle, category });
       } 
       const groupedPosts = postList.reduce((acc, post) => {

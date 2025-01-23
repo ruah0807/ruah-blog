@@ -15,6 +15,24 @@ button {
   user-select: none; /* Disable text selection */
 }
 
+button {
+  background-color: transparent; /* Green */
+  border: none;
+  color: #84787a;
+  padding: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+button:hover {
+  color: #67585b;
+}
+
 .line {
   color: #67585b;
 }
