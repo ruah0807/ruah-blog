@@ -3,7 +3,7 @@ import matter from 'gray-matter';
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './MDFile.css';
 import TOC from '../components/TOC';
 
@@ -19,7 +19,6 @@ const MDFile: React.FC = () => {
   const [date, setDate] = useState<string>('');
   const contentRef = useRef<HTMLDivElement>(null);
   const tocRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
   const { category, subtitle } = useParams();
 const fileName = (category ? `${category}/${subtitle}` : subtitle) || '';
   useEffect(() => {
@@ -65,7 +64,6 @@ const fileName = (category ? `${category}/${subtitle}` : subtitle) || '';
   return (
     <div className='markdown-container'>
       <div className='markdown-content' ref={contentRef}>
-      <button onClick={() => navigate(-1)}>❮ Back</button>
         <div className='md-header'>
           <div className='md-title'>{title}</div>
           <div className='md-date'>{date}</div>

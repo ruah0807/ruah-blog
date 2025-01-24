@@ -1,5 +1,11 @@
 header {
-  background-color: #2f2f2f; /* 다크 모드 헤더 배경색 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff; /* 배경색을 설정하여 고정된 헤더가 잘 보이도록 합니다 */
+  z-index: 1000; /* 다른 요소들 위에 표시되도록 z-index를 설정합니다 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자를 추가하여 헤더를 강조합니다 */
   padding: 10px 50px;
   color: #e0e0e0;
   display: flex;
@@ -9,25 +15,41 @@ header {
 }
 
 .header-title {
-  justify-content: center;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+nav {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-nav li {
-  cursor: pointer;
-  margin-right: 20px;
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
+
+nav li {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.header-back-container {
+  display: flex;
+  align-items: center;
+}
+
 .header-logo {
   width: 60px;
+}
+
+.header-back {
+  margin: 5px 10px;
+  font-size: 20px;
 }
 
 @media (max-width: 768px) {
@@ -36,5 +58,8 @@ nav li {
   }
   .header-title {
     font-size: 16px;
+  }
+  .header-logo {
+    width: 45px;
   }
 }
