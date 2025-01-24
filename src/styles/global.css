@@ -37,10 +37,6 @@ button:hover {
   color: #67585b;
 }
 /* sidebar */
-.hamburger {
-  display: none;
-}
-
 .sidebar ul {
   list-style: none;
   padding: 0;
@@ -86,6 +82,7 @@ button:hover {
 .sidebar-folder {
   color: #dfcfd2;
   font-size: medium;
+  line-height: 2;
 }
 
 .file-item {
