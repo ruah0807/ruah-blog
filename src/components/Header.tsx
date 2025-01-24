@@ -15,26 +15,27 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   };
 
   const handleMenuClick = () => {
-    navigate('/menu'); // URL 변경
     toggleSidebar(); // 사이드바 토글
   };
 
   return (
     <header>
-      <div className='header-title' onClick={handleTitleClick} style={{ cursor: 'pointer' }}>
+      <div className='header-wrapper'>
         <div className='header-back-container'>
           <button className='header-back' onClick={() => navigate(-1)}>❮ </button>
-          <img className='header-logo' draggable="false" src={logo} alt="logo" />
+          <div className='header-title' onClick={handleTitleClick}>
+            <img className='header-logo' draggable="false" src={logo} alt="logo" />
+          </div>
         </div>
+        <nav>
+          <ul>
+            <li className='header-nav-item'>About Me</li>
+            <li className='header-nav-menu' onClick={handleMenuClick}>
+              목록보기
+            </li>
+          </ul>
+        </nav>
       </div>
-      <nav>
-        <ul>
-          <li>About Me</li>
-          <li className='hamburger' onClick={handleMenuClick}>
-            목록보기
-          </li>
-        </ul>
-      </nav>
     </header>
   );
 };

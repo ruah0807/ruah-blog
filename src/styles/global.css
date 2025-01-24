@@ -105,6 +105,7 @@ button:hover {
 }
 .content-wrapper {
   display: flex;
+  margin: 80px 0;
   max-width: 1200px; /* Maximum width for content */
   width: 100%;
   box-sizing: border-box; /* Include padding in width */
@@ -139,11 +140,7 @@ button:hover {
     width: 100%;
     display: none;
   }
-  .hamburger {
-    display: block;
-    margin: 10px;
-    cursor: pointer;
-  }
+
   .post-container {
     font-size: 14px; /* Smaller font size for smaller screens */
   }
