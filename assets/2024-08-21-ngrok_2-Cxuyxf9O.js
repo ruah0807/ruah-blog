@@ -1,0 +1,147 @@
+const n=`---
+title: ngrok을 사용하여 로컬 FastAPI 서버를 외부에 노출하기
+---
+
+#### 로컬에서 FastAPI를 활용한 Self-Query RAG 구현과 ngrok을 통한 Supabase Edge Functions 연동
+
+## ngrok란?
+
+> ngrok은 로컬에서 실행 중인 웹 서버를 외부에서 접근할 수 있는 URL로 노출해주는 도구입니다. 개발 중인 로컬 서버를 일시적으로 외부에서 접근 가능하게 하여 테스트하거나, 외부 API와의 통합을 쉽게 할 수 있습니다.
+
+#### 사용사례
+
+로컬에서 개발 중인 FastAPI 서버를 외부 클라이언트(Supabase Edge Functions)와 연결하여, 외부에서도 테스트를 할 수 있는 환경을 제공하려 사용하게 되었습니다.
+
+### 왜 ngrok을 사용했는가?
+
+- Supabase Edge Functions에서 LangChain을 활용한 Self-Query RAG를 구현하는 과정에서, 로컬에서 실행 중인 FastAPI 서버를 외부에서 접근 가능하게 해야 했습니다. Edge Functions는 인터넷에서 접근 가능한 엔드포인트가 필요하므로, 로컬 서버를 외부에 노출할 수 있는 방법이 필요했습니다.
+- Deno 기반의 Edge Functions에서 npm 라이브러리를 사용하는 데 어려움이 있었고, 특정 라이브러리 간의 버전 호환성 문제도 발생했습니다. 이에 따라 FastAPI로 전환한 후, 로컬 서버를 외부에 노출시켜야 하는 필요성이 생겼습니다.
+
+---
+
+## ngrok 설정 및 사용법
+
+자세한 사항은 [ngrok 공식 홈페이지 다운로드](https://ngrok.com/download)에 나와있습니다.
+
+### MacOS ngrok 설치
+
+터미널에서 다음 명령어를 사용하여 ngrok을 설치합니다:
+
+\`\`\`terminal
+ brew install ngrok/ngrok/ngrok
+\`\`\`
+
+직접 다운받는 방법 대신 brew 설치를 했습니다.
+
+### ngrok 회원가입 후 auth token 받기
+
+[ngrok 공식 홈페이지](https://ngrok.com) 에서 회원가입 후
+
+![](https://velog.velcdn.com/images/looa0807/post/11d3a4f8-bbb9-4cfc-8d29-8a8429a24292/image.png)
+Tunnels > Authtokens > Add Tunnel Authtoken 을 클릭후 토큰을 생성 후 복사 합니다.
+
+### 터미널 authtoken 입력
+
+터미널로 돌아와 복사한 authtoken과 함께 입력합니다
+
+\`\`\`terminal
+ngrok config add-authtoken <your_authtoken>
+\`\`\`
+
+### 로컬 서버를 외부에 노출
+
+#### uvicorn 서버실행
+
+\`\`\`terminal
+uvicorn main:app --reload
+\`\`\`
+
+FastAPI 서버가 로컬에서 실행 중이라면, 다음 명령어를 통해 로컬 서버를 외부에 노출합니다:
+
+\`\`\`terminal
+ngrok http 8000
+\`\`\`
+
+- '8000'은 당신의 fastAPI 로컬 포트 번호를 입력해야합니다.
+
+명령어 실행 후 생성된 URL(예: https://<generated_subdomain>.ngrok-free.app)을 Edge Functions나 외부에서 사용합니다.
+
+![](https://velog.velcdn.com/images/looa0807/post/0374eb90-e8a5-4768-8459-ddcaa4413849/image.png)
+
+빨간 박스부분이 로컬주소 대신 대체될 주소입니다.
+
+## FastAPI 서버와 ngrok 통합 실전 예제
+
+### FastAPI 서버 코드 예제
+
+FastAPI 서버에서 다음과 같은 POST 요청을 처리하는 엔드포인트 예제 입니다.
+
+\`\`\`
+from fastapi import FastAPI, Body
+
+app = FastAPI()
+
+// 프롬프트 로직...
+
+@app.post("/generate-guide/")
+async def generate_custom_guide(surveyId: int = Body(...), recipeId: int = Body(...)):
+    # 가이드를 생성하는 로직
+    return {"guide": guide}
+\`\`\`
+
+Supabase Edge Functions에서 FastAPI의 엔드포인트를 호출하는 Deno 서버 코드가 있다고 가정
+
+\`\`\`typescript
+import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+
+serve(async (req) => {
+  const { surveyId, recipeId } = await req.json();
+
+  try {
+    const response = await fetch(
+      " https://9dab-1-230-118-63.ngrok-free.app/generate-guide/",
+      {
+        // 아까 본 빨간 박스의 주소를 로컬 주소 대신 써야합니다.
+        method: "POST", // post 요청을 보냅니다.
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ surveyId, recipeId }),
+      }
+    );
+
+    const data = await response.json();
+    return new Response(JSON.stringify({ guide: data.guide }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+});
+\`\`\`
+
+- FastAPI 서버의 엔드포인트는 POST 요청을 사용하며 /generate-guide/ URL에서 데이터를 처리합니다.
+- Edge Functions에서 FastAPI 서버의 엔드포인트를 호출할 때 동일한 POST 메서드와 URL을 사용해야 하며, 그렇지 않으면 요청이 제대로 처리되지 않을 수 있습니다.
+
+또한, ngrok을 사용하여 FastAPI 서버를 외부에서 접근 가능하게 만들 때, ngrok에서 생성된 URL을 Edge Functions 코드에 반영해야 합니다. URL이 변경될 때마다 이 부분을 업데이트하는 것도 중요합니다.
+![](https://velog.velcdn.com/images/looa0807/post/7ca095bb-dc33-4441-91ac-ce66b1e6b0e7/image.png)
+
+![](https://velog.velcdn.com/images/looa0807/post/e84c01cf-2625-4752-b5c0-c956fdebe25a/image.png)
+
+위의 예시는 간소화시켰지만 해당 요청한 엔드포인트 "200 OK"가 뜨면서 가이드가 잘 호출이 되는 것을 확인할 수 있습니다.
+
+---
+
+### 결론
+
+#### ngrok을 사용하여 얻은 이점
+
+ngrok을 통해 로컬에서 개발 중인 FastAPI 서버를 쉽게 외부에 노출할 수 있었으며, 이를 통해 Supabase Edge Functions와의 통합 작업을 원활히 진행할 수 있었습니다.
+
+#### 최종 배포 계획
+
+현재는 ngrok을 사용하여 개발 중이지만, 최종 배포 시에는 FastAPI 서버를 클라우드 서버에 배포하여 직접 운영하거나, 장기적인플랜을 위해 미리 데이터들을 생성시켜 저장할 예정입니다.
+`;export{n as default};
