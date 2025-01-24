@@ -1,11 +1,25 @@
 header {
   background-color: #2f2f2f; /* 다크 모드 헤더 배경색 */
-  padding: 10px 50px;
-  color: #e0e0e0;
+  padding: 5px 20px; /* 양쪽 여백 */
+  color: #b0a3a6;
   display: flex;
-  font-size: 13px;
+  justify-content: center; /* 래퍼를 가운데 정렬 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-wrapper {
+  display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1500px; /* 최대 너비 설정 */
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
 .header-title {
@@ -16,7 +30,7 @@ header {
 nav ul {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 20px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -24,17 +38,44 @@ nav ul {
 
 nav li {
   cursor: pointer;
-  margin-right: 20px;
 }
+
+.header-back-container {
+  display: flex;
+  align-items: center;
+}
+
 .header-logo {
   width: 60px;
 }
 
+.header-back {
+  padding: 5px 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.header-nav-item {
+  display: block;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.header-nav-menu {
+  display: none;
+}
+
 @media (max-width: 768px) {
   header {
-    padding: 5px 10px;
+    padding: 0 10px; /* 작은 화면에서 양쪽 여백 줄이기 */
   }
-  .header-title {
-    font-size: 16px;
+  .header-logo {
+    width: 45px;
+  }
+  .header-nav-item,
+  .header-nav-menu {
+    display: block;
+    margin: 10px;
+    cursor: pointer;
   }
 }
