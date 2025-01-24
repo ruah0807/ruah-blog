@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
         </div>
         <nav>
           <ul>
-            <li className='header-nav-item'>About Me</li>
+            {/* <li className='header-nav-item'>About Me</li> */}
             <li className='header-nav-menu' onClick={handleMenuClick}>
               목록보기
             </li>
