@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../Header/Header";
 import { Outlet } from "react-router";
 import PostList from "../../pages/PostList";
+import styles from "./RootLayout.module.scss";
 
 const RootLayout = () => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
@@ -13,13 +14,18 @@ const RootLayout = () => {
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
-      <div className={`container ${showSidebar ? "show-sidebar" : ""}`}>
-        <div className="content-wrapper">
-          <div className="post-list-container">
+      <div
+        className={`${styles.container} ${
+          showSidebar ? `${styles.show_sidebar}` : ""
+        }`}
+      >
+        <div className={styles.content_wrapper}>
+          <div className={styles.post_list_container}>
             <PostList />
           </div>
-          <div className="post-container"></div>
-          <Outlet />
+          <div className={styles.post_container}>
+            <Outlet />
+          </div>
         </div>
       </div>
     </>

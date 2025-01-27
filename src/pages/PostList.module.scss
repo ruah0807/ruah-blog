@@ -1,0 +1,56 @@
+/* sidebar */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px; /* 리스트 항목 간의 간격 */
+  cursor: pointer;
+  font-size: 13px;
+  text-align: left;
+}
+
+.sidebar li:hover {
+  color: #fc4d71; /* 호버 시 배경색 변경 */
+}
+
+.sidebar li.active {
+  font-weight: bold;
+  color: #fc4d71; /* 호버 시 배경색 변경 */
+}
+
+.sidebar_title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ff99ac;
+}
+
+.sidebar_date {
+  font-size: x-small;
+  color: #b0a3a6;
+  margin-left: 5px;
+}
+
+.sidebar_count {
+  font-size: small;
+  color: #b0a3a6;
+}
+.sidebar_category {
+  cursor: pointer;
+  color: #dfcfd2;
+}
+.sidebar_folder {
+  color: #dfcfd2;
+  font-size: 15px;
+  line-height: 2;
+}
+
+.file_item {
+  padding-left: 10px; /* Add indentation */
+}
+
+.file_item.active {
+  font-weight: bold;
+}
