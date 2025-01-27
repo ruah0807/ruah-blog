@@ -1,5 +1,5 @@
 const n=`---
-title: PyTorch Workflow | Data(visualize) -> Build Model -> Train Model
+title: PyTorch Workflow
 ---
 
 # PyTorch Workflow
@@ -21,7 +21,7 @@ Resources :
 5. 'saving and loading a model',
 6. 'putting it all together'
 
-## Preparing loading data
+## 1. Preparing and loading data
 
 머신러닝에서의 데이터는 거의 모든것이 될 수있다.
 
@@ -68,7 +68,7 @@ print("y 길이:", len(y))
 
 ![](https://velog.velcdn.com/images/looa0807/post/ffe293f5-d53b-4502-846c-9bdf0cf0f617/image.png)
 
-## 1. Data 세트 분할 : Training Data & Test Data
+### Data 세트 분할 : Training Data & Test Data
 
 데이터를 훈련 세트와 테스트 세트로 분할하는 것은 가장 중요한 개념 중 하나이다.
 
@@ -277,7 +277,7 @@ plot_predictions(predictions=y_preds)
 - 메모리 최적화
   - 필요하지 않은 데이터를 저장하지 않음.
 
-## 3. Train model
+## 3~4. Train model with inference mode
 
 훈련의 전체 개념은 모델이 어떤 알 수 없는 매개변수(이들은 무작위일 수 있음)에서 어떤 알 수 있는 매개변수로 이동하는 것이다. 데이터의 잘못된 표현에서 좋은 표현으로 이어지는 다른 최악의 상황에서도 마찬가지이다.
 
