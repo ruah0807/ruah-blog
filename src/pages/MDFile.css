@@ -1,7 +1,16 @@
 .markdown-container {
   display: flex;
-  height: 100vh; /* Full height */
-  overflow: hidden; /* Prevent scrolling on the container */
+}
+
+/* 마크다운 콘텐츠 */
+.markdown-content {
+  color: #dfcfd2; /* 텍스트 색상 */
+  padding: 20px;
+
+  max-height: 100vh;
+  line-height: 1.5;
+  font-size: 14px;
+  width: 80%;
 }
 
 .toc-container {
@@ -35,17 +44,6 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
-}
-
-/* 마크다운 콘텐츠 */
-.markdown-content {
-  color: #dfcfd2; /* 텍스트 색상 */
-  padding: 20px;
-  overflow-y: auto; /* Enable vertical scrolling */
-  max-height: 100vh;
-  line-height: 1.5;
-  font-size: 14px;
-  width: 80%;
 }
 
 .markdown-content h1,
@@ -103,6 +101,6 @@
     margin: 0 10px;
   }
   .toc-container {
-    display: none; /* Hide TOC on small screens */
+    display: none; /*Hide TOC on small screens*/
   }
 }
