@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import matter from "gray-matter";
-import "./TOC.css";
+import styles from "./TOC.module.scss";
 import { HashLink as Link } from "react-router-hash-link";
 
 type TOCProps = {
@@ -45,7 +45,7 @@ const TOC: React.FC<TOCProps> = ({ fileName }) => {
   }, [fileName]);
 
   return (
-    <ul className="toc-list">
+    <ul className={styles.toc_list}>
       {headings.map((heading, index) => (
         <li key={index} style={{ marginLeft: (heading.level - 1) * 10 }}>
           <Link to={`#${heading.id}`}>{heading.text}</Link>

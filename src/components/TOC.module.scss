@@ -1,26 +1,25 @@
-.toc-list {
+.toc_list {
   position: fixed;
   width: 250px;
   list-style: none;
-  line-height: 1.5;
   font-size: 13px;
   margin: 0;
   padding: 0;
 }
-.toc-list li {
+.toc_list li {
   margin-left: 0; /* Reset margin */
   margin-bottom: 7px;
 }
 
-.toc-list a {
+.toc_list a {
   text-decoration: none; /* Remove underline */
   color: #b0a3a6; /* Text color */
 }
 
-.toc-list a:hover {
+.toc_list a:hover {
   color: #ff9a8b; /* Hover color */
 }
 
-.toc-list a:active {
+.toc_list a:active {
   color: #ff9a8b; /* Active color */
 }

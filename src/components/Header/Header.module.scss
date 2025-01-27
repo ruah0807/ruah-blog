@@ -14,7 +14,7 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.header-wrapper {
+.header_wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,7 +24,7 @@ header {
   font-size: 14px;
 }
 
-.header-title {
+.header_title {
   justify-content: center;
   text-align: center;
 }
@@ -42,12 +42,12 @@ nav li {
   cursor: pointer;
 }
 
-.header-back-container {
+.header_back_container {
   display: flex;
   align-items: center;
 }
 
-.header-logo {
+.header_logo {
   width: 60px;
 }
 
@@ -57,13 +57,13 @@ nav li {
   cursor: pointer;
 }
 
-.header-nav-item {
+.header_nav_menu {
   display: block;
   margin: 10px;
   cursor: pointer;
 }
 
-.header-nav-menu {
+.header_nav_menu {
   display: none;
 }
 
@@ -71,11 +71,11 @@ nav li {
   header {
     padding: 0 10px; /* 작은 화면에서 양쪽 여백 줄이기 */
   }
-  .header-logo {
+  .header_logo {
     width: 45px;
   }
-  .header-nav-item,
-  .header-nav-menu {
+  .header_nav_item,
+  .header_nav_menu {
     display: block;
     margin: 10px;
     cursor: pointer;

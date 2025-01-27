@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../../public/ruah_blog.svg";
 import { useNavigate } from "react-router";
-import "./Header.css";
+import styles from "./Header.module.scss";
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const navigate = useNavigate();
 
   const handleTitleClick = () => {
-    navigate("/ruah-blog"); // Navigate to the main page
+    navigate("/"); // Navigate to the main page
   };
 
   const handleMenuClick = () => {
@@ -20,14 +20,14 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
 
   return (
     <header>
-      <div className="header-wrapper">
-        <div className="header-back-container">
-          <button className="header-back" onClick={() => navigate(-1)}>
+      <div className={styles.header_wrapper}>
+        <div className={styles.header_back_container}>
+          <button className={styles.header_back} onClick={() => navigate(-1)}>
             ❮{" "}
           </button>
-          <div className="header-title" onClick={handleTitleClick}>
+          <div className={styles.header_title} onClick={handleTitleClick}>
             <img
-              className="header-logo"
+              className={styles.header_logo}
               draggable="false"
               src={logo}
               alt="logo"
@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
         <nav>
           <ul>
             {/* <li className='header-nav-item'>About Me</li> */}
-            <li className="header-nav-menu" onClick={handleMenuClick}>
+            <li className={styles.header_nav_menu} onClick={handleMenuClick}>
               목록보기
             </li>
           </ul>

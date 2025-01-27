@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import matter from "gray-matter";
 import { useNavigate } from "react-router";
 import getDateString from "../utils/getDateString";
-
+import styles from "./PostList.module.scss";
 type Post = {
   title: string;
   date: string;
@@ -65,18 +65,18 @@ const PostList = () => {
   }, []);
 
   return (
-    <div className="sidebar">
-      <p className="sidebar-title"> 블로그 리스트 </p>
-      <p className="sidebar-count">
+    <div className={styles.sidebar}>
+      <p className={styles.sidebar_title}> 블로그 리스트 </p>
+      <p className={styles.sidebar_count}>
         전체 블로그 {Object.values(state.postsByCategory).flat().length}개
       </p>
       {Object.entries(state.postsByCategory)
         .sort(([a], [b]) => (a === "Others" ? 1 : b === "Others" ? -1 : 0))
         .map(([category, posts]) => (
-          <div className="sidebar-category" key={category}>
+          <div className={styles.sidebar_category} key={category}>
             {category !== "Others" && (
               <div
-                className="sidebar-folder"
+                className={styles.sidebar_folder}
                 draggable="false"
                 onClick={() =>
                   setState((prevState) => ({
@@ -90,7 +90,7 @@ const PostList = () => {
               </div>
             )}
             {(state.selectedCategory === category || category === "Others") && (
-              <ul className="sidebar-list">
+              <ul className={styles.sidebar_list}>
                 {posts.map((post, index) => {
                   console.log("포스트", post);
                   return (
@@ -105,12 +105,14 @@ const PostList = () => {
                           selectedPost: post.fileName,
                         }));
                       }}
-                      className={`file-item ${
-                        state.selectedPost === post.fileName ? "active" : ""
+                      className={`${styles.file_item} ${
+                        state.selectedPost === post.fileName
+                          ? styles.active
+                          : ""
                       }`}
                     >
                       {post.title}
-                      <span className="sidebar-date"> {post.date}</span>
+                      <span className={styles.sidebar_date}> {post.date}</span>
                     </li>
                   );
                 })}

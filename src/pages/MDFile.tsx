@@ -2,10 +2,11 @@ import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { useSearchParams } from "react-router";
-import "./MDFile.css";
+import styles from "./MDFile.module.scss";
 import TOC from "../components/TOC";
 import useFetchMdContent from "../hooks/useFetchMdContent";
 import renderHeading from "../utils/renderHeading";
+import rehypeRaw from "rehype-raw";
 
 type ExtraProps = {
   inline?: boolean;
@@ -20,14 +21,15 @@ const MDFile = () => {
   const { content, fileName } = useFetchMdContent();
 
   return (
-    <div className="markdown-container">
-      <div className="markdown-content">
-        <div className="md-header">
-          <div className="md-title">{title}</div>
+    <div className={styles.markdown_container}>
+      <div className={styles.markdown_content}>
+        <div className={styles.md_header}>
+          <div className={styles.md_title}>{title}</div>
           <div className="md-date">{date}</div>
         </div>
 
         <Markdown
+          rehypePlugins={[rehypeRaw]}
           components={{
             h1: ({ children }) => renderHeading({ children, headingNo: 1 }),
             h2: ({ children }) => renderHeading({ children, headingNo: 2 }),
