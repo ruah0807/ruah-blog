@@ -1,5 +1,6 @@
 const n=`---
-title: "LangChain 도구(Tools)"
+title: "Agent Tools | LangChain 도구(Tools)"
+date: 2025-01-27
 ---
 
 # 도구 (Tools)
@@ -318,7 +319,7 @@ image_url = dalle.run(chain.invoke({"image_desc" : query}))
 Image(url=image_url)
 \`\`\`
 
-<img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-GdjIuIPxJK99DMMVRPzqCmQ9/user-Ay3dqUtJOMGOQXx1DS8wjjUU/img-mkMW3CYHptWVlvM3AnyHbwry.png?st=2025-01-27T12%3A59%3A36Z&se=2025-01-27T14%3A59%3A36Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-01-27T01%3A11%3A35Z&ske=2025-01-28T01%3A11%3A35Z&sks=b&skv=2024-08-04&sig=MzSWd0s3d1pC0MWp8hKm//yblpQaMeiJvvwcDTnm1XI%3D"/>
+![](https://velog.velcdn.com/images/looa0807/post/0e58bc26-0e5f-46f5-8fb1-3f9467dabcde/image.png)
 
 ## 사용자 정의 도구(Custom Tool)
 
@@ -432,8 +433,4 @@ search_keyword_news.invoke({"query": "한국 정치 현황"})
       'content': '김동연, 미디어리더들과 대화…한국 정치·경제 통찰 공유 - 네이트 뉴스'},
      {'url': 'https://news.google.com/rss/articles/CBMiXEFVX3lxTE9Ddmo2bW1wcW1FaVNKSjRRdVNnUGduOS1RN2h0Qlg4WWZlLVlJRzVOTXBqWTBQdXR6MDlqSXRNTWJLUDRzU25uMVYySzVJMVN6Mld6VmFmaVFydzNy0gFTQVVfeXFMUDZFYXBvUjF2UlcxNHJRVnByaHBDazg1QS1zZFRSSk00aGxzcFJOZlJwcGJweHJDaE45UEVYMHh2Z0hXOTlSQXk5SXA0aFhFVThhemM?oc=5',
       'content': '다보스서 엘 고어 만난 김동연, 계엄 이후 한국 정치·경제 회복 탄력성 강조 - KPI뉴스'}]
-
-\`\`\`
-<img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-GdjIuIPxJK99DMMVRPzqCmQ9/user-Ay3dqUtJOMGOQXx1DS8wjjUU/img-mkMW3CYHptWVlvM3AnyHbwry.png?st=2025-01-27T12%3A59%3A36Z&se=2025-01-27T14%3A59%3A36Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-01-27T01%3A11%3A35Z&ske=2025-01-28T01%3A11%3A35Z&sks=b&skv=2024-08-04&sig=MzSWd0s3d1pC0MWp8hKm//yblpQaMeiJvvwcDTnm1XI%3D"/>
-\`\`\`
 `;export{n as default};
