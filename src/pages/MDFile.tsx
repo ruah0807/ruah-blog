@@ -7,6 +7,7 @@ import TOC from "../components/TOC";
 import useFetchMdContent from "../hooks/useFetchMdContent";
 import renderHeading from "../utils/renderHeading";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 
 type ExtraProps = {
   inline?: boolean;
@@ -30,6 +31,7 @@ const MDFile = () => {
 
         <Markdown
           rehypePlugins={[rehypeRaw]}
+          remarkPlugins={[remarkGfm]}
           components={{
             h1: ({ children }) => renderHeading({ children, headingNo: 1 }),
             h2: ({ children }) => renderHeading({ children, headingNo: 2 }),
