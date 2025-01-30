@@ -10,6 +10,8 @@ import {
 import RootLayout from "./components/feature/RootLayout.tsx";
 import MDFile from "./pages/MDFile.tsx";
 
+// window.addEventListener("contextmenu", (e) => e.preventDefault()); // 페이지 전체 우클릭 방지
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route path="/" element={<RootLayout />} errorElement={<>에러페이지</>}>

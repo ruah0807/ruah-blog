@@ -11,7 +11,12 @@
       window.Buffer = Buffer;
     </script>
   </head>
-  <body>
+  <!-- 우클릭방지, 드래그방지, 선택방지 -->
+  <body
+    oncontextmenu="return false"
+    ondragstart="return false"
+    onselectstart="return false"
+  >
     <div id="root"></div>
     <script type="module" src="./src/main.tsx"></script>
   </body>
