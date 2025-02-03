@@ -1,0 +1,243 @@
+const n=`---
+title: LangGraph 기능 | TypedDict, Annotated, Reducer
+date: 2025-02-03
+---
+
+## LangGraph에 자주 등장하는 Python 문법
+
+### TypedDict
+
+\`dict\`와 \`TypedDict\`의 차이점과 \`TypedDict\`가 왜 \`dict\`대신 사용되는지 설명한다.
+
+1. \`dict\`와 \`TypedDict\`의 차이점
+
+- 타입 검사 :
+  - \`dict\` : 런타임에 타입검사를하지 않는다.
+  - \`TypedDict\` : 정적 타입 검사를 제공. 즉, 코드 작성시 IDE나 타입 체커가 오류를 미리 잡아낼 수 있다.
+- 키와 값의 타입:
+  - \`dict\` : 키와 값의 타입을 일반적으로 지정한다. (예 : Dict[str, str])
+  - \`TypedDict\` : 각 키에 대해 구체적인 타입을 지정할 수 있다.
+- 유연성 :
+  - \`dict\` : 런타임에 키를 추가하거나 제거할 수 있다.
+  - \`TypedDict\` : 정의된 구조를 따라야한다. 추가적인 키는 타입 오류를 발생시킨다.
+
+2. \`TypedDict\`가 \`dict\` 대신 사용되는 이유 :
+
+- 타입 안정성 : \`TypedDict\`는 더 엄격한 타입검사를 제공하여 잠재적인 버그를 미리 방지.
+
+- 코드 가독성 : \`TypedDict\`를 사용하면 딕셔너리의 구조를 명확하게 정의할 수 있어 코드의 가독성이 향상.
+
+- IDE 지원 : \`TypedDict\`를 사요 ㅇ하면 IDE에서 자동완성 및 타입 힌트를 더 장확하게 제공받음.
+
+- 문서화 : \`TypeDict\`는 코드 자체가 문서의 역할을 하여 딕셔너리의 구조를 명확히 보여줌.
+
+\`\`\`python
+# TypedDict 와 Dict 차이점 예시
+from typing import Dict, TypedDict
+
+# Dict 사용
+sample_dict : Dict[str,str] = {
+    "name" : "Ruah",
+    "age" : 37,
+    "job" : "developer",
+}
+
+# TypedDict 사용
+class Person(TypedDict):
+    name : str
+    age: int
+    job: str
+
+typed_dict : Person = {"name" : "Ruah", "age" : 37, "job" : "developer"}
+\`\`\`
+
+\`\`\`python
+# dict의 경우
+sample_dict["age"] = "35" #  정수에서 문자열로 변경되어도 오류 발생하지 않음
+sample_dict["new_field"] = "추가 정보" # 새로운 키를 추가할 수 있음
+
+# TypedDict의 경우
+typed_dict["age"] = 35 # 정수형으로 올바르게 사용
+typed_dict["age"] = "35" # 타입체커가 오류를 감지
+typed_dict["new_field"] = ("추가 정보") # 타입 체커가 정의되지 않은 키를 추가하려고 하면 오류 발생
+
+\`\`\`
+
+But, TypedDict의 진정한 가치는 정적타입 검사기를 사용할때 드러난다.
+
+예를들어, mypy와 같은 정적 타입 검사기를 사용하거나 PyCharm, VSCode등의 IDE에서 타입 검사기능을 활성화하면, 이러한 타입 불일치와 정의되지 않은 키 추가를 오류로 표시한다.
+
+### Annotated
+
+이 문법은 타입 힌트에 메타데이터를 추가할 수 잇게 해준다.
+
+#### \`Annotated\`를 사용하는 주요 이유
+
+- 추가 정보 제공(타입힌트) / 문서화
+  - 타입 힌트에 추가적인 정보를 포함시킬 수 있다. 이는 코드를 읽는 사람이나 도구에 더 많은 컨텍스트를 제공.
+  - 코드에 대한 추가 설명을 타입 힌트에 직접 포함시킬 수 있다.
+
+\`name : Annotated[str, "이름"]\`
+
+\`age : Annotated[int, "나이"]\`
+
+---
+
+\`Annotated\`는 Python의 typing 모듈에서 제공하는 특별한 타입 힌트로서, 기존 타입에 메타 데이터를 추가할 수 있게 해준다.
+
+\`Annotated\`는 타입 힌트에 추가정보를 포함시킬 수 있는 기능을 제공한다. 이를 통해 코드의 가독성을 높이고, 더 자세한 타입정보를 제공할 수 있다.
+
+#### Annotated 사용 이유
+
+1. **추가 정보 제공** : 타입 힌트에 메타 데이터를 추가하여 더 상세한 정보를 제공한다.
+
+2. **문서화** : 코드 자체에 추가 설명을 포함시켜 문서화 효과를 얻을 수 있다.
+
+3. **유효성 검사** : 특정 라이브러리 (예 : pydantic)와 함께 사용하여 데이터 유효성 검사를 수행할 수있다.
+
+4. **프레임워크 지원** : 일부 프레임워크(예 : LangGraph)에서 타입 힌트에 메타데이터를 사용하여 추가 기능을 제공할 수 있다.
+
+#### 기본문법
+
+- \`Type\` : 기본타입 (예 : \`str\`, \`int\`, \`List[str]\` 등)
+- \`Metadata1\`, \`Metadata2\` : 메타데이터 (예 : \`"이름"\`, \`"나이"\` 등)
+
+\`\`\`py
+from typing import Annotated
+variable : Annotated[Type, Metadata1, Metadata2]
+\`\`\`
+
+#### 사용 예시
+
+\`\`\`python
+from typing import Annotated
+
+name : Annotated[str, "name"]
+age : Annotated[int, "age(0~100)"]
+\`\`\`
+
+**Pydantic과 함께 사용 예시**
+
+\`\`\`python
+from typing import Annotated, List
+from pydantic import Field, BaseModel, ValidationError
+
+class Employee(BaseModel):
+    # ... 은 필수 필드임을 나타냄
+    id: Annotated[int, Field(..., description="Employee ID")]
+    name : Annotated[str, Field(..., min_length=3, max_length=30, description="Employee Name")]
+    # gt(greater than): 최소값, lt(less than): 최대값
+    age : Annotated[int, Field(..., gt=18, lt=100, description="Employee Age(19~99)")]
+    salary: Annotated[
+        float, Field(gt=0, lt=10000, description= "A year Salary(단위: 만원, 최대 1억")
+    ]
+    skills: Annotated[
+        List[str], Field(min_items=1, max_items=10, description="At least one skill is required")
+    ]
+
+# 유효한 데이터로 인스턴스 생성
+try:
+    print("[유효한 직원 정보 생성 시도]")
+    valid_employee = Employee(
+        id = 1, name = "김루아", age = 35, salary = 3000, skills = ["Python", "AI", "Pytorch"]
+    )
+    print(f"유효한 직원 정보: {valid_employee}")
+except ValidationError as e:
+    print(f"유효하지 않은 직원 정보: {e}")
+
+# 유효하지 않은 데이터로 인스턴스 생성 시도
+try:
+    print("\\n[유효하지 않은 직원 정보 생성 시도]")
+    invalid_employee = Employee(
+        name= "승태", # 이름이 너무 짧음
+        age = 101, # 나이가 너무 큼
+        salary = 0, # 연봉이 0 이하
+        skills = "JAVA" # 스킬이 리스트가 아님
+    )
+    print(f"유효하지 않은 직원 정보: {invalid_employee}")
+except ValidationError as e:
+    print("유효성 검사 오류:")
+    for error in e.errors():
+        print(f"- {error['loc'][0]}: {error['msg']}")
+
+\`\`\`
+
+    [유효한 직원 정보 생성 시도]
+    유효한 직원 정보: id=1 name='김루아' age=35 salary=3000.0 skills=['Python', 'AI', 'Pytorch']
+
+    [유효하지 않은 직원 정보 생성 시도]
+    유효성 검사 오류:
+    - id: Field required
+    - name: String should have at least 3 characters
+    - age: Input should be less than 100
+    - salary: Input should be greater than 0
+    - skills: Input should be a valid list
+
+### LangGraph에서의 사용 (add_messages)
+
+\`add_message\`는 LangGraph에서 메시지를 리스트에 추가하는 함수이다.
+
+\`\`\`python
+from typing import Annotated, TypedDict
+from langgraph.graph import add_messages
+
+class MyData(TypedDict):
+    messages: Annotated[list, add_messages]
+\`\`\`
+
+**참고**
+
+1. \`Annotated\`는 Python 3.9 이상에서 사용가능
+
+2. 런타임에는 \`Annotated\`가 무시되므로, 실제 동작에는 영향을 주지 않는다.
+
+3. 타입 검사 도구나 IDE가 \`Annotated\`를 지원해야 그 효과를 볼 수 있다.
+
+### add_messages 사용 예시
+
+messages 키는 add_messages Reducer 함수로 주석이 달려잇으며, 이는 LangGraph에게 기존 목록에 새 메시지를 추가하도록 지시한다.
+
+주석이 없는 상태 키는 각 업데이트에 의해 덮어 쓰여져 가장 최근의 값이 저장된다.
+
+add_messages 함수는 2개의 인자(left, right)를 받으며 좌, 우 메시지를 병합하는 방식으로 동작한다.
+
+- 주요 기능
+  - 두개의 메시지 리스트를 병합
+  - 기본적으로 "append-only" 상태를 유지.
+  - 동일한 ID를 가진 메시지가 있을 경우, 새 메시지로 기존 메시지를 대체.
+- 동작 방식
+  - right의 메시지 중 left에 동일한 ID를 가진 메시지가 있으면, right의 메시지로 대체.
+  - 그 외의 경우 right의 메시지가 left에 추가.
+- 매개변수
+  - left (Messages): 기본 메시지 리스트
+  - right (Messages): 병합할 메시지 리스트 또는 단일 메시지
+- 반환값
+  - Messages: right의 메시지들이 left에 병합된 새로운 메시지 리스트
+
+\`\`\`python
+from langchain_core.messages import AIMessage, HumanMessage
+from langgraph.graph import add_messages
+
+# 기본 사용 예시
+msgs1 = [HumanMessage(content="안녕하세요?", id="1")]
+msgs2 = [AIMessage(content="반갑습니다~", id="2")]
+
+result1 = add_messages(msgs1, msgs2) # 각 id가 다른 메세지들을 append-only 방식으로 병합
+print(result1)
+\`\`\`
+
+    [HumanMessage(content='안녕하세요?', additional_kwargs={}, response_metadata={}, id='1'), AIMessage(content='반갑습니다~', additional_kwargs={}, response_metadata={}, id='2')]
+
+동일한 ID를 가진 메시지는 대체한다.
+
+\`\`\`python
+# 동일한 ID를 가진 메시지 대체 예시
+msgs1 = [HumanMessage(content="안녕하세요?", id="1")]
+msgs2 = [HumanMessage(content="반갑습니다~", id="1")]
+
+result2 = add_messages(msgs1, msgs2)
+print(result2)
+\`\`\`
+
+    [HumanMessage(content='반갑습니다~', additional_kwargs={}, response_metadata={}, id='1')]
+`;export{n as default};
