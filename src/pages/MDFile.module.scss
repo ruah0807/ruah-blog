@@ -1,5 +1,6 @@
 .markdown_container {
   display: flex;
+  padding: 5px;
 }
 
 /* 마크다운 콘텐츠 */
@@ -42,6 +43,7 @@
   justify-content: flex-end;
   margin-bottom: 10px;
 }
+
 
 .markdown_content h1,
 .markdown_content h2,
@@ -97,6 +99,24 @@
   border: 0.5px solid #2f2f2f;
 }
 
+.markdown_content div{
+  overflow-x: auto;
+}
+.markdown_content table {
+  border-collapse: collapse; /* 테두리 겹침 제거 */
+}
+.markdown_content th, 
+.markdown_content td {
+  border: 1px solid gray; /* 테두리 색상 설정 */
+  padding: 5px; /* 셀 안쪽 여백 */
+  text-align: left; /* 텍스트 정렬 */
+  word-wrap: break-word; /* 긴 단어 줄바꿈 */
+  font-size: small;
+}
+.markdown_content th{
+  border-bottom: 3px solid gray;
+}
+
 @media (max-width: 768px) {
   .markdown_content pre {
     font-size: xx-small;
@@ -115,6 +135,10 @@
   }
   .toc_container {
     display: none; /*Hide TOC on small screens*/
+  }
+  .markdown_content th, 
+  .markdown_content td {
+    font-size: x-small;
   }
 }
 

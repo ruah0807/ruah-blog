@@ -30,8 +30,8 @@ const MDFile = () => {
         </div>
 
         <Markdown
-          rehypePlugins={[rehypeRaw]}
-          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]} // html 허용
+          remarkPlugins={[remarkGfm]} // 마크다운 테이블 허용
           components={{
             h1: ({ children }) => renderHeading({ children, headingNo: 1 }),
             h2: ({ children }) => renderHeading({ children, headingNo: 2 }),

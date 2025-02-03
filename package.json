@@ -15,10 +15,13 @@
   "dependencies": {
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "buffer": "^6.0.3",
+    "cloudinary": "^2.5.1",
     "events": "^3.3.0",
+    "express": "^4.21.2",
     "gh-pages": "^6.3.0",
     "gray-matter": "^4.0.3",
     "markdown-it-highlightjs": "^4.2.0",
+    "multer": "1.4.5-lts.1",
     "process": "^0.11.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
