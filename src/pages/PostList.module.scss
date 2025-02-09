@@ -1,7 +1,7 @@
 /* sidebar */
 .sidebar ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .sidebar li {
@@ -12,37 +12,37 @@
 }
 
 .sidebar li:hover {
-  color: #fc4d71; /* 호버 시 배경색 변경 */
+  color: var(--point); /* 호버 시 배경색 변경 */
 }
 
 .sidebar li.active {
   font-weight: bold;
-  color: #fc4d71; /* 호버 시 배경색 변경 */
+  color: var(--point); /* 호버 시 배경색 변경 */
 }
 
 .sidebar_title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #ff99ac;
+  color: var(--main-1);
 }
 
 .sidebar_date {
   font-size: x-small;
-  color: #b0a3a6;
+  color: var(--gray200);
   margin-left: 5px;
 }
 
 .sidebar_count {
   font-size: small;
-  color: #b0a3a6;
+  color: var(--gray200);
 }
 .sidebar_category {
   cursor: pointer;
-  color: #dfcfd2;
+  color: var(--gray100);
 }
 .sidebar_folder {
-  color: #dfcfd2;
+  color: var(--gray100);
   font-size: 15px;
   line-height: 2;
 }
@@ -54,6 +54,3 @@
   white-space: normal; /* 줄바꿈 허용 */
   word-wrap: break-word; /* 긴 단어 줄바꿈 */
 }
-
-
-

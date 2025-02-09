@@ -95,7 +95,7 @@ table {
 
 // 선택 영역
 ::selection {
-  background-color: #b3d4fc;
-  color: #000;
+  background-color: var(--blue);
+  color: var(--gray900);
   text-shadow: none;
 }

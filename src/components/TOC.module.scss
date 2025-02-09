@@ -13,13 +13,13 @@
 
 .toc_list a {
   text-decoration: none; /* Remove underline */
-  color: #b0a3a6; /* Text color */
+  color: var(--gray200); /* Text color */
 }
 
 .toc_list a:hover {
-  color: #ff9a8b; /* Hover color */
+  color: var(--point); /* Hover color */
 }
 
 .toc_list a:active {
-  color: #ff9a8b; /* Active color */
+  color: var(--point); /* Active color */
 }

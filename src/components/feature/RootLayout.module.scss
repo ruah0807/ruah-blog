@@ -1,48 +1,43 @@
-
 .container {
-display: flex;
-justify-content: center;
-align-items: flex-start;
-height: 100vh;
-
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
 }
 .content_wrapper {
-display: flex;
-margin: 80px 0;
-max-width: 1200px; /* Maximum width for content */
-width: 100%;
-box-sizing: border-box; /* Include padding in width */
+  display: flex;
+  margin: 80px 0;
+  max-width: 1200px; /* Maximum width for content */
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width */
 }
 
 .post_list_container {
-width: 20%; /* TOC의 너비와 일치시킴 */
-padding: 10px;
-
+  width: 20%; /* TOC의 너비와 일치시킴 */
+  padding: 10px;
 }
 
 .post_container {
-flex: 1;
-color: #fde0db;
-max-height: 100vh;
-width: 80%;
+  flex: 1;
+  color: var(--main-1);
+  max-height: 100vh;
+  width: 80%;
 }
-
-
 
 @media (max-width: 768px) {
-.container {
+  .container {
     flex-direction: column;
     padding: 5px;
-}
-.show_sidebar .post_list_container {
+  }
+  .show_sidebar .post_list_container {
     display: block; /* Show sidebar when toggled */
-}
-.post_list_container {
+  }
+  .post_list_container {
     width: 100%;
     display: none;
-}
+  }
 
-.post_container {
+  .post_container {
     font-size: 14px; /* Smaller font size for smaller screens */
-}
+  }
 }

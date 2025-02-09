@@ -9,7 +9,7 @@ import {
 } from "react-router";
 import RootLayout from "./components/feature/RootLayout.tsx";
 import MDFile from "./pages/MDFile.tsx";
-
+import "./index.scss";
 // window.addEventListener("contextmenu", (e) => e.preventDefault()); // 페이지 전체 우클릭 방지
 
 const router = createBrowserRouter(

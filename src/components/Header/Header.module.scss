@@ -1,7 +1,7 @@
 header {
-  background-color: #2f2f2f; /* 다크 모드 헤더 배경색 */
+  background-color: var(--gray700); /* 다크 모드 헤더 배경색 */
   padding: 5px 20px; /* 양쪽 여백 */
-  color: #b0a3a6;
+  color: var(--gray200);
   display: flex;
   justify-content: center; /* 래퍼를 가운데 정렬 */
   position: fixed;

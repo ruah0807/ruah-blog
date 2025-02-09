@@ -5,7 +5,7 @@
 
 /* 마크다운 콘텐츠 */
 .markdown_content {
-  color: #dfcfd2; /* 텍스트 색상 */
+  color: var(--gray100); /* 텍스트 색상 */
   padding: 20px;
   max-height: 100vh;
   font-size: 14px;
@@ -13,7 +13,7 @@
 }
 
 .toc_container {
-  border-left: 1px solid #2f2f2f;
+  border-left: 1px solid var(--gray700);
   padding: 10px;
   overflow-y: auto; /* Enable vertical scrolling */
   max-height: 100vh;
@@ -26,7 +26,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 30px 0;
-  border-bottom: 1px solid #2f2f2f;
+  border-bottom: 1px solid var(--gray700);
 }
 
 .md_title {
@@ -38,12 +38,11 @@
 
 .md_date {
   font-size: 14px;
-  color: #84787a;
+  color: var(--gray200);
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
 }
-
 
 .markdown_content h1,
 .markdown_content h2,
@@ -57,13 +56,13 @@
 
 .markdown_content h1,
 .markdown_content h2 {
-  color: #fc4d71;
+  color: var(--point);
 }
 .markdown_content h3 {
-  color: #ff9a8b;
+  color: var(--main-1);
 }
 .markdown_content a {
-  color: #61b1e6;
+  color: var(--blue);
 }
 .markdown_content pre {
   font-size: x-small; /* Adjust the font size */
@@ -74,7 +73,7 @@
   ::-webkit-scrollbar {
     display: none;
   }
-  background-color: #2f2f2f;
+  background-color: var(--gray700);
   padding: 10px;
 }
 
@@ -87,7 +86,7 @@
   ::-webkit-scrollbar {
     display: none;
   }
-  background-color: #2f2f2f;
+  background-color: var(--gray700);
 }
 .markdown_content img {
   max-width: 100%; /* Ensure images do not exceed the container width */
@@ -96,25 +95,25 @@
   margin: 0 auto; /* Center images if needed */
 }
 .markdown_content hr {
-  border: 0.5px solid #2f2f2f;
+  border: 0.5px solid var(--gray700);
 }
 
-.markdown_content div{
+.markdown_content div {
   overflow-x: auto;
 }
 .markdown_content table {
   border-collapse: collapse; /* 테두리 겹침 제거 */
 }
-.markdown_content th, 
+.markdown_content th,
 .markdown_content td {
-  border: 1px solid gray; /* 테두리 색상 설정 */
+  border: 1px solid var(--gray500); /* 테두리 색상 설정 */
   padding: 5px; /* 셀 안쪽 여백 */
   text-align: left; /* 텍스트 정렬 */
   word-wrap: break-word; /* 긴 단어 줄바꿈 */
   font-size: small;
 }
-.markdown_content th{
-  border-bottom: 3px solid gray;
+.markdown_content th {
+  border-bottom: 3px solid var(--gray700);
 }
 
 @media (max-width: 768px) {
@@ -125,7 +124,7 @@
     font-size: x-small; /* Adjust the font size */
   }
   .markdown_content {
-    color: #e0e0e0; /* 텍스트 색상 */
+    color: var(--gray100); /* 텍스트 색상 */
     padding: 0;
     // overflow-y: auto;
     max-height: 100vh;
@@ -136,9 +135,8 @@
   .toc_container {
     display: none; /*Hide TOC on small screens*/
   }
-  .markdown_content th, 
+  .markdown_content th,
   .markdown_content td {
     font-size: x-small;
   }
 }
-
